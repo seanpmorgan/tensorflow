@@ -151,7 +151,8 @@ class WeightNorm(Wrapper):
           shape=(self.layer_depth,),
           initializer=initializers.get('ones'),
           dtype=self.layer.kernel.dtype,
-          trainable=True)
+          trainable=True,
+          aggregation=variable_scope.VariableAggregation.MEAN)
 
       with ops.control_dependencies([self.layer.g.assign(
           self._init_norm(self.layer.v))]):
